@@ -1,5 +1,10 @@
 #!/bin/bash
+
+kind create cluster --name todo-lab --config cluster.yml
+
 kubectl apply -f .infrastructure/mysql/ns.yml
+kubectl apply -f .infrastructure/security/rbac.yml
+
 kubectl apply -f .infrastructure/mysql/configMap.yml
 kubectl apply -f .infrastructure/mysql/secret.yml
 kubectl apply -f .infrastructure/mysql/service.yml
