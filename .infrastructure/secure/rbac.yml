@@ -6,7 +6,7 @@ metadata:
 
 ---
 
-apiVersion: rca.authorization.k8s.io/v1
+apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
   name: secrets-reader
@@ -20,15 +20,15 @@ rules:
 ---
 
 apiVersion: rbac.authorization.k8s.io/v1
-kind: RoleBiding
+kind: RoleBinding
 metadata:
   name: secrets-reader-binding
   namespace: todoapp
 subjects:
-  kind: ServiceAccount
-  name: todoapp-sa
-  namespace: todoapp
-  roleRef:
-    kind: Role
-    name: secrets-reader
-    apiGroups: rbac.authorization.k8s.io
+  - kind: ServiceAccount
+    name: todoapp-sa
+    namespace: todoapp
+roleRef:
+  kind: Role
+  name: secrets-reader
+  apiGroups: rbac.authorization.k8s.io
